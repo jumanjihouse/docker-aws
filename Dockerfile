@@ -1,5 +1,8 @@
 FROM alpine:latest
 
+# Which version of awscli to install.
+ENV VERSION 1.7.34
+
 RUN apk upgrade --update --available && \
     apk add \
       ca-certificates \
@@ -8,7 +11,7 @@ RUN apk upgrade --update --available && \
       python \
       py-pip \
     && rm -f /var/cache/apk/* \
-    && pip install awscli \
+    && pip install -Iv awscli==${VERSION} \
     && adduser -D user
 
 USER user
