@@ -1,6 +1,8 @@
 AWS CLI
 =======
 
+[![](https://badge.imagelayers.io/jumanjiman/aws.svg)](https://imagelayers.io/?images=jumanjiman/aws:latest 'View image size and layers')&nbsp;
+
 Project: [https://github.com/jumanjihouse/docker-aws]
 (https://github.com/jumanjihouse/docker-aws)
 
