@@ -13,6 +13,7 @@ RUN apk upgrade --update --available && \
       py-pip \
     && rm -f /var/cache/apk/* \
     && pip install -Iv awscli==${VERSION} \
+    && apk del --purge py-pip py-setuptools \
     && adduser -D user
 
 USER user
