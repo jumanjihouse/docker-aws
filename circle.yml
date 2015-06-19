@@ -27,7 +27,7 @@ deployment:
     owner: jumanjihouse
     commands:
       - docker login -e ${mail} -u ${user} -p ${pass}
-      - docker tag jumanjiman/aws jumanjiman/aws:${VERSION}-$(date +%Y%m%d)-git-${CIRCLE_SHA1:0:7}
-      - docker push jumanjiman/aws:${VERSION}-$(date +%Y%m%d)-git-${CIRCLE_SHA1:0:7}
+      - docker tag jumanjiman/aws jumanjiman/aws:${VERSION}-$(date +%Y%m%dT%H%M)-git-${CIRCLE_SHA1:0:7}
+      - docker push jumanjiman/aws:${VERSION}-$(date +%Y%m%dT%H%M)-git-${CIRCLE_SHA1:0:7}
       - docker push jumanjiman/aws:latest
       - docker logout
