@@ -1,10 +1,8 @@
 AWS CLI
 =======
 
-[![](https://badge.imagelayers.io/jumanjiman/aws.svg)](https://imagelayers.io/?images=jumanjiman/aws:latest 'View image size and layers')&nbsp;
-[![Circle CI](https://circleci.com/gh/jumanjihouse/docker-aws.png?circle-token=5303a3a083c3d19463bbd1b08937b24b3417d70e)](https://circleci.com/gh/jumanjihouse/docker-aws/tree/master 'View CI builds')
-
-[![Throughput Graph](https://graphs.waffle.io/jumanjihouse/docker-aws/throughput.svg)](https://waffle.io/jumanjihouse/docker-aws/metrics)
+This git repo provides [AWS CLI](http://aws.amazon.com/cli/)
+from [PIP](https://pypi.python.org/pypi/awscli) in a Docker container.
 
 Project: [https://github.com/jumanjihouse/docker-aws]
 (https://github.com/jumanjihouse/docker-aws)
@@ -12,12 +10,10 @@ Project: [https://github.com/jumanjihouse/docker-aws]
 Docker image: [https://registry.hub.docker.com/u/jumanjiman/aws/]
 (https://registry.hub.docker.com/u/jumanjiman/aws/)
 
+[![](https://badge.imagelayers.io/jumanjiman/aws.svg)](https://imagelayers.io/?images=jumanjiman/aws:latest 'View image size and layers')&nbsp;
+[![Circle CI](https://circleci.com/gh/jumanjihouse/docker-aws.png?circle-token=5303a3a083c3d19463bbd1b08937b24b3417d70e)](https://circleci.com/gh/jumanjihouse/docker-aws/tree/master 'View CI builds')
 
-About
------
-
-This git repo provides [AWS CLI](http://aws.amazon.com/cli/)
-from [PIP](https://pypi.python.org/pypi/awscli) in a Docker container.
+[![Throughput Graph](https://graphs.waffle.io/jumanjihouse/docker-aws/throughput.svg)](https://waffle.io/jumanjihouse/docker-aws/metrics)
 
 
 How-to
