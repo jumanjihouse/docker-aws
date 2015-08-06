@@ -2,7 +2,7 @@ FROM alpine:latest
 
 # Which version of awscli to install.
 # If you change this, you must also change Makefile and circle.yml.
-ENV VERSION 1.7.42
+ENV VERSION 1.7.43
 
 RUN apk upgrade --update --available && \
     apk add \
