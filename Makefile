@@ -1,7 +1,7 @@
 # vim: set ts=8 sw=8 ai noet:
 
 # If you change this, you must also update circle.yml and Dockerfile.
-VERSION = 1.8.5
+VERSION = 1.8.6
 
 ifdef CIRCLECI
 	CAPS =
