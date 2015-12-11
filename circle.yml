@@ -2,7 +2,7 @@
 machine:
   environment:
     # If you change this, you should change it in Dockerfile and Makefile.
-    VERSION: 1.9.11
+    VERSION: 1.9.12
   services:
     - docker
 
