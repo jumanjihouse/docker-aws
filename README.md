@@ -11,6 +11,7 @@ Docker image: [https://registry.hub.docker.com/u/jumanjiman/aws/]
 (https://registry.hub.docker.com/u/jumanjiman/aws/)
 
 [![Image Size](https://img.shields.io/imagelayers/image-size/jumanjiman/aws/latest.svg)](https://imagelayers.io/?images=jumanjiman/aws:latest 'View image size and layers')&nbsp;
+[![Image Layers](https://img.shields.io/imagelayers/layers/jumanjiman/aws/latest.svg)](https://imagelayers.io/?images=jumanjiman/aws:latest 'View image size and layers')&nbsp;
 [![Docker Registry](https://img.shields.io/docker/pulls/jumanjiman/aws.svg)](https://registry.hub.docker.com/u/jumanjiman/aws)&nbsp;
 [![Circle CI](https://circleci.com/gh/jumanjihouse/docker-aws.png?circle-token=5303a3a083c3d19463bbd1b08937b24b3417d70e)](https://circleci.com/gh/jumanjihouse/docker-aws/tree/master 'View CI builds')
 
