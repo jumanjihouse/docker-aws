@@ -3,6 +3,7 @@ machine:
   environment:
     # If you change this, you should change it in Dockerfile and Makefile.
     VERSION: 1.9.15
+    TAG: ${VERSION}-$(date +%Y%m%dT%H%M)-git-${CIRCLE_SHA1:0:7}
   services:
     - docker
 
@@ -24,7 +25,7 @@ deployment:
     owner: jumanjihouse
     commands:
       - docker login -e ${mail} -u ${user} -p ${pass}
-      - docker tag jumanjiman/aws jumanjiman/aws:${VERSION}-$(date +%Y%m%dT%H%M)-git-${CIRCLE_SHA1:0:7}
-      - docker push jumanjiman/aws:${VERSION}-$(date +%Y%m%dT%H%M)-git-${CIRCLE_SHA1:0:7}
+      - docker tag jumanjiman/aws jumanjiman/aws:${TAG}
+      - docker push jumanjiman/aws:${TAG}
       - docker push jumanjiman/aws:latest
       - docker logout
