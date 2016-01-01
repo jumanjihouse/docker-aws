@@ -23,8 +23,14 @@ How-to
 
 ### Build and test
 
-    make all
-    make test
+We use circleci to build, test, and publish the image to Docker hub.
+We use [BATS](https://github.com/sstephenson/bats) to run the test harness.
+BATS output resembles:
+
+    ✓ awscli shows help with no options
+    ✓ awscli is the correct version
+
+    2 tests, 0 failures
 
 
 ### Pull an already-built image

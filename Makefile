@@ -1,14 +1,5 @@
 # vim: set ts=8 sw=8 ai noet:
 
-# If you change this, you must also update circle.yml and Dockerfile.
-VERSION = 1.9.15
-
-ifdef CIRCLECI
-	CAPS =
-else
-	CAPS = --cap-drop all
-endif
-
 .PHONY: all
 all: runtime
 
@@ -23,5 +14,4 @@ runtime:
 
 .PHONY: test
 test:
-	docker run --rm --read-only ${CAPS} jumanjiman/aws 2>&1 | grep SYNOPSIS
-	docker run --rm --read-only ${CAPS} jumanjiman/aws --version 2>&1 | grep ${VERSION}
+	bats test/test_*.bats
