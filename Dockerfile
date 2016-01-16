@@ -2,7 +2,7 @@ FROM alpine:3.3
 
 # Which version of awscli to install.
 # If you change this, you must also change Makefile and circle.yml.
-ENV VERSION 1.9.18
+ENV VERSION 1.9.20
 
 RUN apk upgrade --no-cache --available && \
     apk add --no-cache \
