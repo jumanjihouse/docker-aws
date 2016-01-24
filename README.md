@@ -5,10 +5,11 @@ This git repo provides [AWS CLI](http://aws.amazon.com/cli/)
 from [PIP](https://pypi.python.org/pypi/awscli) in a Docker container.
 
 Project: [https://github.com/jumanjihouse/docker-aws]
-(https://github.com/jumanjihouse/docker-aws)
-
+(https://github.com/jumanjihouse/docker-aws)<br/>
 Docker image: [https://registry.hub.docker.com/u/jumanjiman/aws/]
-(https://registry.hub.docker.com/u/jumanjiman/aws/)
+(https://registry.hub.docker.com/u/jumanjiman/aws/)<br/>
+Upstream release notes: [http://aws.amazon.com/releasenotes/CLI]
+(http://aws.amazon.com/releasenotes/CLI)
 
 [![Image Size](https://img.shields.io/imagelayers/image-size/jumanjiman/aws/latest.svg)](https://imagelayers.io/?images=jumanjiman/aws:latest 'View image size and layers')&nbsp;
 [![Image Layers](https://img.shields.io/imagelayers/layers/jumanjiman/aws/latest.svg)](https://imagelayers.io/?images=jumanjiman/aws:latest 'View image size and layers')&nbsp;
