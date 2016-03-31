@@ -2,7 +2,7 @@
 machine:
   environment:
     # If you change this, you should change it in Dockerfile.
-    VERSION: 1.10.16
+    VERSION: 1.10.17
     TAG: ${VERSION}-$(date +%Y%m%dT%H%M)-git-${CIRCLE_SHA1:0:7}
     BATS_VER: 0.4.0
   services:
