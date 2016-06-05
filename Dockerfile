@@ -1,4 +1,4 @@
-FROM alpine:3.3
+FROM alpine:3.4
 
 # Which version of awscli to install.
 # If you change this, you must also change Makefile and circle.yml.
