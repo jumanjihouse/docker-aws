@@ -32,6 +32,8 @@ BATS output resembles:
 
     2 tests, 0 failures
 
+:warning: Build requires Docker 1.9.0 or higher for `--build-arg`.
+
 
 ### Pull an already-built image
 

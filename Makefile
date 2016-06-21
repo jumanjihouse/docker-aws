@@ -9,7 +9,10 @@ clean:
 
 .PHONY: runtime
 runtime:
-	docker build --rm -t jumanjiman/aws .
+	docker build \
+		--build-arg BUILD_DATE=${BUILD_DATE} \
+		--build-arg VCS_REF=${VCS_REF} \
+		--rm -t jumanjiman/aws .
 	docker images | grep aws
 
 .PHONY: test

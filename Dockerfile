@@ -4,6 +4,18 @@ FROM alpine:3.4
 # If you change this, you must also change Makefile and circle.yml.
 ENV VERSION 1.10.38
 
+ARG BUILD_DATE
+ARG VCS_REF
+
+LABEL \
+    io.jumanjiman.github.version=$VERSION \
+    io.jumanjiman.github.build-date=$BUILD_DATE \
+    io.jumanjiman.github.vcs-ref=$BUILD_DATE \
+    io.jumanjiman.github.license="Apache License 2.0" \
+    io.jumanjiman.github.docker.dockerfile="/Dockerfile" \
+    io.jumanjiman.github.vcs-type="Git" \
+    io.jumanjiman.github.vcs-url="https://github.com/jumanjiman/docker-aws.git"
+
 RUN apk upgrade --no-cache --available && \
     apk add --no-cache \
       ca-certificates \
