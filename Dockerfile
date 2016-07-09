@@ -2,7 +2,7 @@ FROM alpine:3.4
 
 # Which version of awscli to install.
 # If you change this, you must also change Makefile and circle.yml.
-ENV VERSION 1.10.45
+ENV VERSION 1.10.46
 
 ARG BUILD_DATE
 ARG VCS_REF
