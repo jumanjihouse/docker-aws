@@ -2,7 +2,7 @@
 machine:
   environment:
     # If you change this, you should change it in Dockerfile.
-    VERSION: 1.10.47
+    VERSION: 1.10.48
     BUILD_DATE: $(date +%Y%m%dT%H%M)
     VCS_REF: ${CIRCLE_SHA1:0:7}
     TAG: ${VERSION}-${BUILD_DATE}-git-${VCS_REF}
