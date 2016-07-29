@@ -12,6 +12,7 @@ runtime:
 	docker build \
 		--build-arg BUILD_DATE=${BUILD_DATE} \
 		--build-arg VCS_REF=${VCS_REF} \
+		--build-arg VERSION=${VERSION} \
 		--rm -t jumanjiman/aws .
 	docker images | grep aws
 
