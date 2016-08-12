@@ -11,7 +11,9 @@ Docker image: [https://registry.hub.docker.com/u/jumanjiman/aws/]
 Upstream changelog: [https://github.com/aws/aws-cli/blob/develop/CHANGELOG.rst]
 (https://github.com/aws/aws-cli/blob/develop/CHANGELOG.rst)
 
-[![](https://imagelayers.io/badge/jumanjiman/aws:latest.svg)](https://imagelayers.io/?images=jumanjiman/aws:latest 'View on imagelayers.io')
+[![Download size](https://images.microbadger.com/badges/image/jumanjiman/aws.svg)](http://microbadger.com/images/jumanjiman/aws "View on microbadger.com")
+[![Version](https://images.microbadger.com/badges/version/jumanjiman/aws.svg)](http://microbadger.com/images/jumanjiman/aws "View on microbadger.com")
+[![Source code](https://images.microbadger.com/badges/commit/jumanjiman/aws.svg)](http://microbadger.com/images/jumanjiman/aws "View on microbadger.com")
 [![Docker Registry](https://img.shields.io/docker/pulls/jumanjiman/aws.svg)](https://registry.hub.docker.com/u/jumanjiman/aws)&nbsp;
 [![Circle CI](https://circleci.com/gh/jumanjihouse/docker-aws.png?circle-token=5303a3a083c3d19463bbd1b08937b24b3417d70e)](https://circleci.com/gh/jumanjihouse/docker-aws/tree/master 'View CI builds')
 
