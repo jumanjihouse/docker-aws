@@ -8,8 +8,8 @@ Project: [https://github.com/jumanjihouse/docker-aws]
 (https://github.com/jumanjihouse/docker-aws)<br/>
 Docker image: [https://registry.hub.docker.com/u/jumanjiman/aws/]
 (https://registry.hub.docker.com/u/jumanjiman/aws/)<br/>
-Upstream release notes: [http://aws.amazon.com/releasenotes/CLI]
-(http://aws.amazon.com/releasenotes/CLI)
+Upstream changelog: [https://github.com/aws/aws-cli/blob/develop/CHANGELOG.rst]
+(https://github.com/aws/aws-cli/blob/develop/CHANGELOG.rst)
 
 [![](https://imagelayers.io/badge/jumanjiman/aws:latest.svg)](https://imagelayers.io/?images=jumanjiman/aws:latest 'View on imagelayers.io')
 [![Docker Registry](https://img.shields.io/docker/pulls/jumanjiman/aws.svg)](https://registry.hub.docker.com/u/jumanjiman/aws)&nbsp;
