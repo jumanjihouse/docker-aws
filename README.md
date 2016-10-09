@@ -60,7 +60,7 @@ View the ci-build-url label on a built image:
 
 Query all the labels inside a built image:
 
-    docker inspect quay.io/iseexchange/flexlm | jq -M '.[].Config.Labels'
+    docker inspect jumanjiman/aws | jq -M '.[].Config.Labels'
 
 
 ### Run
