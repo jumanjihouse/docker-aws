@@ -31,8 +31,9 @@ BATS output resembles:
 
     ✓ awscli shows help with no options
     ✓ awscli is the correct version
+    ✓ ci-build-url label is present
 
-    2 tests, 0 failures
+    3 tests, 0 failures
 
 :warning: Build requires Docker 1.9.0 or higher for `--build-arg`.
 If you want to build locally, you must export an environment variable
@@ -42,6 +43,24 @@ to specify the `VERSION` of awscli.
 ### Pull an already-built image
 
     docker pull jumanjiman/aws
+
+
+### Labels
+
+Each built image has labels that generally follow http://label-schema.org/
+
+We add a label, `ci-build-url`, that is not currently part of the schema.
+This extra label provides a permanent link to the CI build for the image.
+
+View the ci-build-url label on a built image:
+
+    docker inspect \
+      -f '{{ index .Config.Labels "io.github.jumanjiman.ci-build-url" }}' \
+      jumanjiman/aws
+
+Query all the labels inside a built image:
+
+    docker inspect quay.io/iseexchange/flexlm | jq -M '.[].Config.Labels'
 
 
 ### Run

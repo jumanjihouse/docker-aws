@@ -10,6 +10,7 @@ clean:
 .PHONY: runtime
 runtime:
 	docker build \
+		--build-arg CI_BUILD_URL=${CIRCLE_BUILD_URL} \
 		--build-arg BUILD_DATE=${BUILD_DATE} \
 		--build-arg VCS_REF=${VCS_REF} \
 		--build-arg VERSION=${VERSION} \
