@@ -1,4 +1,4 @@
-FROM alpine:3.4
+FROM alpine:3.5
 
 ARG CI_BUILD_URL
 ARG BUILD_DATE
@@ -21,9 +21,10 @@ RUN apk upgrade --no-cache --available && \
       groff \
       less \
       python \
-      py-pip \
-    && pip install -Iv awscli==${VERSION} \
-    && apk del --purge py-pip py-setuptools \
+      && \
+    apk add --no-cache --virtual dev py2-pip && \
+    pip install -Iv --compile --no-cache-dir awscli==${VERSION} && \
+    apk del --purge dev \
     && adduser -D user
 
 USER user
