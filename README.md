@@ -4,12 +4,9 @@ AWS CLI
 This git repo provides [AWS CLI](http://aws.amazon.com/cli/)
 from [PIP](https://pypi.python.org/pypi/awscli) in a Docker container.
 
-Project: [https://github.com/jumanjihouse/docker-aws]
-(https://github.com/jumanjihouse/docker-aws)<br/>
-Docker image: [https://registry.hub.docker.com/u/jumanjiman/aws/]
-(https://registry.hub.docker.com/u/jumanjiman/aws/)<br/>
-Upstream changelog: [https://github.com/aws/aws-cli/blob/develop/CHANGELOG.rst]
-(https://github.com/aws/aws-cli/blob/develop/CHANGELOG.rst)
+Project:            https://github.com/jumanjihouse/docker-aws<br/>
+Docker image:       https://registry.hub.docker.com/u/jumanjiman/aws/<br/>
+Upstream changelog: https://github.com/aws/aws-cli/blob/develop/CHANGELOG.rst
 
 [![Download size](https://images.microbadger.com/badges/image/jumanjiman/aws.svg)](http://microbadger.com/images/jumanjiman/aws "View on microbadger.com")
 [![Version](https://images.microbadger.com/badges/version/jumanjiman/aws.svg)](http://microbadger.com/images/jumanjiman/aws "View on microbadger.com")
