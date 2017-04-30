@@ -12,7 +12,6 @@ jobs:
       BUILD_DATE: $(date +%Y%m%dT%H%M)
       VCS_REF: ${CIRCLE_SHA1:0:7}
       TAG: ${VERSION}-${BUILD_DATE}-git-${VCS_REF}
-      BATS_VER: 0.4.0
 
     steps:
       - setup_remote_docker
