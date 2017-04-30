@@ -1,0 +1,22 @@
+version: '2.1'
+
+services:
+  aws: &defaults
+    image: jumanjiman/aws
+    build:
+      context: .
+      args:
+        CI_BUILD_URL: ${CIRCLE_BUILD_URL}
+        BUILD_DATE:   ${BUILD_DATE}
+        VCS_REF:      ${VCS_REF}
+        VERSION:      ${VERSION}
+    env_file: ci/vars
+    read_only: true
+    cap_drop:
+      - all
+    pids_limit: 30
+    cpu_shares: 1023
+    mem_limit: 1G
+    shm_size: 32M
+    stdin_open: true
+    tty: true

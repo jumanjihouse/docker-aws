@@ -1,3 +1,4 @@
 *.swp
 *~
 credentials
+ci/vars

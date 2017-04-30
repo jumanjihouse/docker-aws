@@ -1,0 +1,10 @@
+#!/bin/bash
+
+. ci/vars
+docker login -u ${user} -p ${pass}
+docker tag jumanjiman/aws jumanjiman/aws:${TAG}
+docker push jumanjiman/aws:${TAG}
+docker push jumanjiman/aws:latest
+docker logout
+
+curl -X POST 'https://hooks.microbadger.com/images/jumanjiman/aws/Lan3ZPTzecbxGrzvkdxR-dTxIB8='
