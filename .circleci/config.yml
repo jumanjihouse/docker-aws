@@ -7,29 +7,36 @@ jobs:
 
     working_directory: ~/wtf/
 
-    environment:
-      VERSION: 1.11.81
-      BUILD_DATE: $(date +%Y%m%dT%H%M)
-      VCS_REF: ${CIRCLE_SHA1:0:7}
-      TAG: ${VERSION}-${BUILD_DATE}-git-${VCS_REF}
-      BATS_VER: 0.4.0
-
     steps:
       - setup_remote_docker
 
       - checkout
 
       - run:
+          name: Store variables
+          command: |
+            cat > /tmp/vars <<-EOF
+            export VERSION=1.11.81
+            export BUILD_DATE=$(date +%Y%m%dT%H%M)
+            export VCS_REF=${CIRCLE_SHA1:0:7}
+            export TAG=\${VERSION}-\${BUILD_DATE}-git-\${VCS_REF}
+            EOF
+
+      - run:
           name: Show details of build environment
           command: |
             set -x
+            . /tmp/vars
+            env | grep -e BUILD_DATE -e VCS_REF -e VERSION -e TAG
             docker info
             docker version
             env | grep CIRCLE
 
       - run:
           name: Build the image
-          command: make all
+          command: |
+            . /tmp/vars
+            make all
 
       - run:
           name: View image details
@@ -40,13 +47,15 @@ jobs:
       - run:
           name: Test the image
           command: |
+            . /tmp/vars
             make test
 
       - deploy:
           name: Deploy from master branch
           command: |
             if [[ ${CIRCLE_BRANCH} = master ]] && [[ -z ${CIRCLE_PR_NUMBER} ]]; then
-              docker login -e ${mail} -u ${user} -p ${pass}
+              . /tmp/vars
+              docker login -u ${user} -p ${pass}
               docker tag jumanjiman/aws jumanjiman/aws:${TAG}
               docker push jumanjiman/aws:${TAG}
               docker push jumanjiman/aws:latest
