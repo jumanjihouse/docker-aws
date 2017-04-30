@@ -1,0 +1,55 @@
+# https://circleci.com/docs/docker
+version: 2
+jobs:
+  build:
+    docker:
+      - image: jumanjiman/devenv:20170430T1625-git-abaebd4
+
+    working_directory: ~/wtf/
+
+    environment:
+      VERSION: 1.11.81
+      BUILD_DATE: $(date +%Y%m%dT%H%M)
+      VCS_REF: ${CIRCLE_SHA1:0:7}
+      TAG: ${VERSION}-${BUILD_DATE}-git-${VCS_REF}
+      BATS_VER: 0.4.0
+
+    steps:
+      - setup_remote_docker
+
+      - checkout
+
+      - run:
+          name: Show details of build environment
+          command: |
+            set -x
+            docker info
+            docker version
+            env | grep CIRCLE
+
+      - run:
+          name: Build the image
+          command: make all
+
+      - run:
+          name: View image details
+          command: |
+            docker images
+            docker inspect jumanjiman/aws
+
+      - run:
+          name: Test the image
+          command: |
+            make test
+
+      - deploy:
+          name: Deploy from master branch
+          command: |
+            if [[ ${CIRCLE_BRANCH} = master ]] && [[ -z ${CIRCLE_PR_NUMBER} ]]; then
+              docker login -e ${mail} -u ${user} -p ${pass}
+              docker tag jumanjiman/aws jumanjiman/aws:${TAG}
+              docker push jumanjiman/aws:${TAG}
+              docker push jumanjiman/aws:latest
+              docker logout
+              curl -X POST 'https://hooks.microbadger.com/images/jumanjiman/aws/Lan3ZPTzecbxGrzvkdxR-dTxIB8='
+            fi
