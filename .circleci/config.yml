@@ -55,7 +55,7 @@ jobs:
           command: |
             if [[ ${CIRCLE_BRANCH} = master ]] && [[ -z ${CIRCLE_PR_NUMBER} ]]; then
               . /tmp/vars
-              docker login -e ${mail} -u ${user} -p ${pass}
+              docker login -u ${user} -p ${pass}
               docker tag jumanjiman/aws jumanjiman/aws:${TAG}
               docker push jumanjiman/aws:${TAG}
               docker push jumanjiman/aws:latest
