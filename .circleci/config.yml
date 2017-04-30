@@ -2,7 +2,9 @@
 version: 2
 jobs:
   build:
-    machine: true
+    docker:
+      - image: jumanjiman/devenv:20170430T1625-git-abaebd4
+
     working_directory: ~/wtf/
 
     environment:
@@ -13,6 +15,8 @@ jobs:
       BATS_VER: 0.4.0
 
     steps:
+      - setup_remote_docker
+
       - checkout
 
       - run:
@@ -22,24 +26,6 @@ jobs:
             docker info
             docker version
             env | grep CIRCLE
-
-      - restore_cache:
-          key: bats_v${BATS_VER}
-
-      - run:
-          name: Install BATS
-          command: |
-            if [[ ! -e ~/deps/bats_v${BATS_VER}.tar.gz ]]; then
-              mkdir -p ~/deps
-              curl -sSL -o ~/deps/bats_v${BATS_VER}.tar.gz https://github.com/sstephenson/bats/archive/v${BATS_VER}.tar.gz
-            fi
-            tar -xf ~/deps/bats_v${BATS_VER}.tar.gz
-            sudo bats-${BATS_VER}/install.sh /usr/local
-
-      - save_cache:
-          key: bats_v${BATS_VER}
-          paths:
-            - ~/deps
 
       - run:
           name: Build the image
