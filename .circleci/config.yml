@@ -3,7 +3,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: jumanjiman/devenv:20170430T1625-git-abaebd4
+      - image: jumanjiman/cci:20170430T2312-git-3c95863
 
     working_directory: ~/wtf/
 
