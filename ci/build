@@ -1,19 +1,43 @@
 #!/bin/sh
 set -e
+set -u
+
+VERSION=1.11.127
+UP2DATE=false
+AUTOBUILD=${AUTOBUILD:-false}
+
+# AUTOBUILD is defined through parameterized builds.
+# See ci/autobuild directory for details.
+if [[ ${AUTOBUILD} = true ]]; then
+  # On circleci, we use https://github.com/jumanjihouse/cci
+  # to provide the microbadger and pypi commands.
+  pypi_latest=$(pypi info awscli | awk '/^Latest release/ {print $NF}')
+  dock_latest=$(microbadger -name jumanjiman/aws | awk '/version/ {print $NF}')
+  VERSION=${pypi_latest}
+
+  if [[ ${pypi_latest} = ${dock_latest} ]]; then
+    echo "Nothing to do."
+    UP2DATE=true
+  fi
+fi
 
 cat > ci/vars <<-EOF
-VERSION=1.11.127
+VERSION=${VERSION}
+UP2DATE=${UP2DATE}
 BUILD_DATE=$(date +%Y%m%dT%H%M)
-VCS_REF=${CIRCLE_SHA1:0:7}
+VCS_REF=$(git rev-parse --short HEAD)
 TAG=\${VERSION}-\${BUILD_DATE}-git-\${VCS_REF}
 
 export VERSION
+export UP2DATE
 export BUILD_DATE
 export VCS_REF
 export TAG
 EOF
 
 . ci/vars
+[[ ${UP2DATE} = true ]] && exit 0
+
 docker-compose build
 
 docker images

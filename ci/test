@@ -1,4 +1,7 @@
 #!/bin/bash
 set -e
 
+. ci/vars
+[[ ${UP2DATE} = true ]] && exit 0
+
 bats test/test_*.bats

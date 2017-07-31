@@ -1,0 +1,8 @@
+[Unit]
+Description=Trigger circleci build of docker-aws once per hour
+
+[Timer]
+OnCalendar=hourly
+
+[Install]
+WantedBy=multi-user.target

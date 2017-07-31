@@ -48,6 +48,10 @@ and runs acceptance tests.
 If all tests pass on master branch in the unattended test harness,
 it pushes the built images to the Docker hub.
 
+The upstream awscli utility is updated frequently, so we have added
+a simple automation to trigger a parameterized build on circleci once per hour.
+See [`ci/autobuild`](ci/autobuild) for details.
+
 
 How-to
 ------

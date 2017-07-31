@@ -1,6 +1,8 @@
 #!/bin/bash
 
 . ci/vars
+[[ ${UP2DATE} = true ]] && exit 0
+
 docker login -u ${user} -p ${pass}
 docker tag jumanjiman/aws jumanjiman/aws:${TAG}
 docker push jumanjiman/aws:${TAG}

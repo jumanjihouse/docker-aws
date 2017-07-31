@@ -1,0 +1,12 @@
+[Unit]
+Description=trigger build on circleci for docker-aws
+Requires=docker.service
+After=docker.service
+
+[Service]
+Type=simple
+Environment=CIRCLE_TOKEN=redacted
+ExecStart=-/opt/sbin/trigger
+
+[Install]
+WantedBy=system-config.target
