@@ -14,7 +14,8 @@ Upstream changelog: https://github.com/aws/aws-cli/blob/develop/CHANGELOG.rst
 [![Docker Registry](https://img.shields.io/docker/pulls/jumanjiman/aws.svg)](https://registry.hub.docker.com/u/jumanjiman/aws)&nbsp;
 [![Circle CI](https://circleci.com/gh/jumanjihouse/docker-aws.png?circle-token=5303a3a083c3d19463bbd1b08937b24b3417d70e)](https://circleci.com/gh/jumanjihouse/docker-aws/tree/master 'View CI builds')
 
-[![Throughput Graph](https://graphs.waffle.io/jumanjihouse/docker-aws/throughput.svg)](https://waffle.io/jumanjihouse/docker-aws/metrics)
+An updated version of this image is generally available within a few hours
+after a new version of awscli becomes available. See below for more details.
 
 
 Overview
@@ -48,8 +49,8 @@ and runs acceptance tests.
 If all tests pass on master branch in the unattended test harness,
 it pushes the built images to the Docker hub.
 
-The upstream awscli utility is updated frequently, so we have added
-a simple automation to trigger a parameterized build on circleci once per hour.
+We trigger a parameterized build on circleci multiple times per day.
+When there is a new version of awscli on pip, we build and publish a new image.
 See [`ci/autobuild`](ci/autobuild) for details.
 
 
