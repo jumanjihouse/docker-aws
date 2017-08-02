@@ -6,6 +6,7 @@ After=docker.service
 [Service]
 Type=simple
 Environment=CIRCLE_TOKEN=redacted
+Environment=SNITCH_URL=https://nosnch.in/redacted
 ExecStart=-/opt/sbin/trigger
 
 [Install]

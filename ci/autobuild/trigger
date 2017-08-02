@@ -26,3 +26,7 @@ curl \
 --header "Content-Type: application/json" \
 --data "${post_data}" \
 --request POST ${trigger_build_url}
+
+# Dead man's snitch with url from systemd environment.
+echo -n 'Snitch: '
+curl ${SNITCH_URL}

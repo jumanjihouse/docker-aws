@@ -1,4 +1,4 @@
-These files are used to trigger hourly "autobuild" of the circleci job.
+These files are used to trigger "autobuild" of the circleci job multiple times per day.
 
 I have a host on Digital Ocean that runs Container Linux.
 
@@ -17,3 +17,6 @@ sudo start trigger.timer
 
 This is based on instructions at
 https://circleci.com/docs/1.0/nightly-builds/
+
+We use https://deadmanssnitch.com/ to notify
+if the cron job doesn't finish successfully at least once per day.
