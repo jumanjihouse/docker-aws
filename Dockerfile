@@ -23,7 +23,11 @@ RUN apk upgrade --no-cache --available && \
       python \
       && \
     apk add --no-cache --virtual dev py2-pip && \
-    pip install -Iv --compile --no-cache-dir awscli==${VERSION} && \
+    ( \
+      [[ ${VERSION} = latest ]] && \
+      pip install -Iv --compile --no-cache-dir awscli || \
+      pip install -Iv --compile --no-cache-dir awscli==${VERSION} \
+    ) && \
     apk del --purge dev \
     && adduser -D user
 

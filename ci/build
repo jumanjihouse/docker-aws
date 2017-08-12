@@ -2,7 +2,18 @@
 set -e
 set -u
 
-VERSION=1.11.127
+# We usually want to install the latest version of awscli, but
+# allow to override by running `VERSION=1.11.27 ci/build`.
+VERSION=${VERSION:-latest}
+
+# Too bad the Dockerfile cannot contain something like this:
+#   LABEL version=$(aws --version 2>&1 | awk '{print $1}' | cut -d/ -f2)
+# Therefore we have to discover the version before we build the image
+# in order to put the version into a LABEL.
+if [[ ${VERSION} = latest ]] && $(command -v pypi &> /dev/null); then
+  VERSION=$(pypi info awscli | awk '/^Latest release/ {print $NF}')
+fi
+
 UP2DATE=false
 AUTOBUILD=${AUTOBUILD:-false}
 
