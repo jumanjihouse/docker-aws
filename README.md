@@ -11,7 +11,7 @@ Upstream changelog: https://github.com/aws/aws-cli/blob/develop/CHANGELOG.rst
 [![Download size](https://images.microbadger.com/badges/image/jumanjiman/aws.svg)](http://microbadger.com/images/jumanjiman/aws "View on microbadger.com")
 [![Version](https://images.microbadger.com/badges/version/jumanjiman/aws.svg)](http://microbadger.com/images/jumanjiman/aws "View on microbadger.com")
 [![Source code](https://images.microbadger.com/badges/commit/jumanjiman/aws.svg)](http://microbadger.com/images/jumanjiman/aws "View on microbadger.com")
-[![Docker Registry](https://img.shields.io/docker/pulls/jumanjiman/aws.svg)](https://registry.hub.docker.com/u/jumanjiman/aws)&nbsp;
+[![Docker Registry](https://img.shields.io/docker/pulls/jumanjiman/aws.svg)](https://registry.hub.docker.com/u/jumanjiman/aws/)&nbsp;
 [![Circle CI](https://circleci.com/gh/jumanjihouse/docker-aws.png?circle-token=5303a3a083c3d19463bbd1b08937b24b3417d70e)](https://circleci.com/gh/jumanjihouse/docker-aws/tree/master 'View CI builds')
 
 An updated version of this image is generally available within a few hours
