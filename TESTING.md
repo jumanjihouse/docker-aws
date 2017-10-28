@@ -12,8 +12,12 @@ As an alternative, you can run the acceptance test harness locally to verify ope
 The test harness uses [BATS](https://github.com/sstephenson/bats).
 Output resembles:
 
-		✓ awscli shows help with no options
-		✓ awscli is the correct version
-		- ci-build-url label is present (skipped: This test only runs on CircleCI)
+    Invoke BATS tests.
+     ✓ awscli shows help with no options
+     ✓ awscli is the correct version
+     - ci-build-url label is present (skipped: This test only runs on CircleCI)
 
-		3 tests, 0 failures, 1 skipped
+    3 tests, 0 failures, 1 skipped
+
+    Check every file for things like trailing whitespace.
+    INFO: OK
