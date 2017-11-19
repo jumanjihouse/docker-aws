@@ -8,7 +8,7 @@ set -o pipefail
 ################################################################################
 
 . ci/helpers.sh
-. ci/vars.sh
+. ci/vars
 [[ ${UP2DATE} == true ]] && exit 0
 
 # shellcheck disable=SC2154
