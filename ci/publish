@@ -1,11 +1,20 @@
 #!/bin/bash
+set -e
+set -u
+set -o pipefail
 
-. ci/vars
-[[ ${UP2DATE} = true ]] && exit 0
+################################################################################
+# Publish the aws images to Docker Hub.
+################################################################################
 
-docker login -u ${user} -p ${pass}
-docker tag jumanjiman/aws jumanjiman/aws:${TAG}
-docker push jumanjiman/aws:${TAG}
+. ci/helpers.sh
+. ci/vars.sh
+[[ ${UP2DATE} == true ]] && exit 0
+
+# shellcheck disable=SC2154
+docker login -u "${user}" -p "${pass}"
+docker tag jumanjiman/aws jumanjiman/aws:"${TAG}"
+docker push jumanjiman/aws:"${TAG}"
 docker push jumanjiman/aws:latest
 docker logout
 

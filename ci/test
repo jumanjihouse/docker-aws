@@ -1,8 +1,20 @@
 #!/bin/bash
 set -e
+set -u
+set -o pipefail
 
+################################################################################
+# Run a test harness.
+# Invoke as "ci/test".
+################################################################################
+
+. ci/helpers.sh
 . ci/vars
 [[ ${UP2DATE} = true ]] && exit 0
+
+if command -v shellcheck &> /dev/null; then
+  shellcheck ci/vars
+fi
 
 echo
 echo Invoke BATS tests.
@@ -12,4 +24,4 @@ echo
 echo Check every file for things like trailing whitespace.
 # Hint: -v1 shows just the names of offending files.
 #       -v2 shows lines with trailing whitespace.
-ci/check-files -v1
+ci/check-files -v2

@@ -1,16 +1,17 @@
 #!/bin/bash
 set -e
 set -u
+set -o pipefail
 
 # WARNING
 #
 # ${CIRCLE_TOKEN} must be defined in the systemd service unit.
 #
 
-_project="jumanjihouse/docker-aws"
-_branch="master"
+declare -r _project="jumanjihouse/docker-aws"
+declare -r _branch="master"
 
-trigger_build_url=https://circleci.com/api/v1.1/project/github/${_project}/tree/${_branch}?circle-token=${CIRCLE_TOKEN}
+declare -r trigger_build_url="https://circleci.com/api/v1.1/project/github/${_project}/tree/${_branch}?circle-token=${CIRCLE_TOKEN}"
 
 post_data=$(cat <<EOF
 {
@@ -25,8 +26,8 @@ curl \
 --header "Accept: application/json" \
 --header "Content-Type: application/json" \
 --data "${post_data}" \
---request POST ${trigger_build_url}
+--request POST "${trigger_build_url}"
 
 # Dead man's snitch with url from systemd environment.
 echo -n 'Snitch: '
-curl ${SNITCH_URL}
+curl "${SNITCH_URL}"

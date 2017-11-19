@@ -1,6 +1,14 @@
-#!/bin/sh
+#!/bin/bash
 set -e
 set -u
+set -o pipefail
+
+################################################################################
+# Build the awscli docker image.
+# Invoke as "ci/build" from the top-level of the git repo.
+################################################################################
+
+. ci/helpers.sh
 
 # We usually want to install the latest version of awscli, but
 # allow to override by running `VERSION=1.11.27 ci/build`.
@@ -10,12 +18,12 @@ VERSION=${VERSION:-latest}
 #   LABEL version=$(aws --version 2>&1 | awk '{print $1}' | cut -d/ -f2)
 # Therefore we have to discover the version before we build the image
 # in order to put the version into a LABEL.
-if [[ ${VERSION} = latest ]] && $(command -v pypi &> /dev/null); then
-  VERSION=$(pypi info awscli | awk '/^Latest release/ {print $NF}')
+if [[ ${VERSION} = latest ]] && command -v pypi &> /dev/null; then
+  VERSION="$(pypi info awscli | awk '/^Latest release/ {print $NF}')"
 fi
 
 UP2DATE=false
-AUTOBUILD=${AUTOBUILD:-false}
+declare -r AUTOBUILD=${AUTOBUILD:-false}
 
 # AUTOBUILD is defined through parameterized builds.
 # See ci/autobuild directory for details.
@@ -26,24 +34,19 @@ if [[ ${AUTOBUILD} = true ]]; then
   dock_latest=$(microbadger -name jumanjiman/aws | awk '/version/ {print $NF}')
   VERSION=${pypi_latest}
 
-  if [[ ${pypi_latest} = ${dock_latest} ]]; then
+  if [[ ${pypi_latest} = "${dock_latest}" ]]; then
     echo "Nothing to do."
     UP2DATE=true
   fi
 fi
 
 cat > ci/vars <<-EOF
-VERSION=${VERSION}
-UP2DATE=${UP2DATE}
-BUILD_DATE=$(date +%Y%m%dT%H%M)
-VCS_REF=$(git rev-parse --short HEAD)
-TAG=\${VERSION}-\${BUILD_DATE}-git-\${VCS_REF}
-
-export VERSION
-export UP2DATE
-export BUILD_DATE
-export VCS_REF
-export TAG
+# shellcheck shell=bash
+declare -rx VERSION=${VERSION}
+declare -rx UP2DATE=${UP2DATE}
+declare -rx BUILD_DATE=$(date +%Y%m%dT%H%M)
+declare -rx VCS_REF=$(git rev-parse --short HEAD)
+declare -rx TAG=\${VERSION}-\${BUILD_DATE}-git-\${VCS_REF}
 EOF
 
 . ci/vars
