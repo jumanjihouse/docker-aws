@@ -16,8 +16,9 @@ Output resembles:
      ✓ awscli shows help with no options
      ✓ awscli is the correct version
      - ci-build-url label is present (skipped: This test only runs on CircleCI)
+     ✓ version label is correct
 
-    3 tests, 0 failures, 1 skipped
+    4 tests, 0 failures, 1 skipped
 
     Check every file for things like trailing whitespace.
     INFO: OK

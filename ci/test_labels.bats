@@ -7,3 +7,10 @@
       jumanjiman/aws
   [[ ${output} =~ circleci.com ]]
 }
+
+@test "version label is correct" {
+  run docker inspect \
+      -f '{{ index .Config.Labels "io.github.jumanjiman.version" }}' \
+      jumanjiman/aws
+  [[ ${output} =~ ${VERSION} ]]
+}

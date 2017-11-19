@@ -4,12 +4,12 @@ services:
   aws: &defaults
     image: jumanjiman/aws
     build:
-      context: .
+      context: src/
       args:
-        CI_BUILD_URL: ${CIRCLE_BUILD_URL}
-        BUILD_DATE:   ${BUILD_DATE}
-        VCS_REF:      ${VCS_REF}
-        VERSION:      ${VERSION}
+        - CI_BUILD_URL=${CIRCLE_BUILD_URL}
+        - BUILD_DATE
+        - VCS_REF
+        - VERSION
     env_file: ci/vars
     read_only: true
     cap_drop:

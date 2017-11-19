@@ -18,7 +18,7 @@ fi
 
 echo
 echo Invoke BATS tests.
-bats test/test_*.bats
+bats ci/test_*.bats
 
 echo
 echo Check every file for things like trailing whitespace.
