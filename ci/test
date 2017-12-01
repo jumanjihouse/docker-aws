@@ -8,20 +8,39 @@ set -o pipefail
 # Invoke as "ci/test".
 ################################################################################
 
+main() {
+  check_files
+
+  if [[ ${UP2DATE} = true ]]; then
+    info "Image is up-to-date on docker hub; nothing left to do."
+  else
+    run_bats
+  fi
+}
+
+check_files() {
+  echo
+  echo Check every file for things like trailing whitespace.
+  # Hint: -v1 shows just the names of offending files.
+  #       -v2 shows lines with trailing whitespace.
+  ci/check-files -v2
+
+  if command -v shellcheck &> /dev/null; then
+    shellcheck ci/vars
+  fi
+}
+
+run_bats() {
+  echo
+  echo Invoke BATS tests.
+  bats ci/test_*.bats
+}
+
+################################################################################
+# Program execution starts here.
+################################################################################
+
 . ci/helpers.sh
 . ci/vars
-[[ ${UP2DATE} = true ]] && exit 0
 
-if command -v shellcheck &> /dev/null; then
-  shellcheck ci/vars
-fi
-
-echo
-echo Invoke BATS tests.
-bats ci/test_*.bats
-
-echo
-echo Check every file for things like trailing whitespace.
-# Hint: -v1 shows just the names of offending files.
-#       -v2 shows lines with trailing whitespace.
-ci/check-files -v2
+main

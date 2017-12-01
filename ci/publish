@@ -7,15 +7,37 @@ set -o pipefail
 # Publish the aws images to Docker Hub.
 ################################################################################
 
+main() {
+  if [[ ${UP2DATE} == true ]]; then
+    info 'Image is up-to-date on docker hub; nothing to do.'
+  else
+    publish
+  fi
+
+  # Ensure Microbadger has latest metadata.
+  poke_microbadger
+}
+
+publish() {
+  # shellcheck disable=SC2154
+  docker login -u "${user}" -p "${pass}"
+  docker tag jumanjiman/aws jumanjiman/aws:"${TAG}"
+  docker push jumanjiman/aws:"${TAG}"
+  docker push jumanjiman/aws:latest
+  docker logout
+}
+
+poke_microbadger() {
+  echo -n 'INFO: microbadger '
+  curl -X POST 'https://hooks.microbadger.com/images/jumanjiman/aws/Lan3ZPTzecbxGrzvkdxR-dTxIB8='
+  echo
+}
+
+################################################################################
+# Program execution starts here.
+################################################################################
+
 . ci/helpers.sh
 . ci/vars
-[[ ${UP2DATE} == true ]] && exit 0
 
-# shellcheck disable=SC2154
-docker login -u "${user}" -p "${pass}"
-docker tag jumanjiman/aws jumanjiman/aws:"${TAG}"
-docker push jumanjiman/aws:"${TAG}"
-docker push jumanjiman/aws:latest
-docker logout
-
-curl -X POST 'https://hooks.microbadger.com/images/jumanjiman/aws/Lan3ZPTzecbxGrzvkdxR-dTxIB8='
+main

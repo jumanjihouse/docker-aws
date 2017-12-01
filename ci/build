@@ -34,8 +34,10 @@ if [[ ${AUTOBUILD} = true ]]; then
   dock_latest=$(microbadger -name jumanjiman/aws | awk '/version/ {print $NF}')
   VERSION=${pypi_latest}
 
+  info "pypi version is \"${pypi_latest}\" according to pypi."
+  info "dock version is \"${dock_latest}\" according to microbadger."
+
   if [[ ${pypi_latest} = "${dock_latest}" ]]; then
-    echo "Nothing to do."
     UP2DATE=true
   fi
 fi
@@ -50,9 +52,10 @@ declare -rx TAG=\${VERSION}-\${BUILD_DATE}-git-\${VCS_REF}
 EOF
 
 . ci/vars
-[[ ${UP2DATE} = true ]] && exit 0
-
-docker-compose build
-
-docker images
-docker inspect jumanjiman/aws
+if [[ ${UP2DATE} = true ]]; then
+  info "Image is up-to-date on docker hub; nothing to do."
+else
+  docker-compose build
+  docker images
+  docker inspect jumanjiman/aws
+fi
