@@ -1,5 +1,4 @@
-AWS CLI
-=======
+# AWS CLI
 
 This git repo provides [AWS CLI](http://aws.amazon.com/cli/)
 from [PIP](https://pypi.python.org/pypi/awscli) in a Docker container.

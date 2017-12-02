@@ -56,6 +56,11 @@ is_ci() {
   [[ -n "${CIRCLECI:-}" ]]
 }
 
+is_git_dirty() {
+  # https://gist.github.com/sindresorhus/3898739
+  git diff --quiet --ignore-submodules HEAD
+}
+
 check_top_dir() {
   declare git_dir
   git_dir="$(git rev-parse --show-toplevel)"
