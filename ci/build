@@ -25,13 +25,25 @@ fi
 UP2DATE=false
 declare -r AUTOBUILD=${AUTOBUILD:-false}
 
+docker_hub_version() {
+  # Query for the version of the image on Docker Hub.
+  for _ in {1..3}; do
+    if microbadger -name jumanjiman/aws | awk '/version/ {print $NF}'; then
+      return 0
+    else
+      sleep 30s
+    fi
+  done
+  return 1
+}
+
 # AUTOBUILD is defined through parameterized builds.
 # See ci/autobuild directory for details.
 if [[ ${AUTOBUILD} = true ]]; then
   # On circleci, we use https://github.com/jumanjihouse/cci
   # to provide the microbadger and pypi commands.
   pypi_latest=$(pypi info awscli | awk '/^Latest release/ {print $NF}')
-  dock_latest=$(microbadger -name jumanjiman/aws | awk '/version/ {print $NF}')
+  dock_latest="$(docker_hub_version)"
   VERSION=${pypi_latest}
 
   info "pypi version is \"${pypi_latest}\" according to pypi."
