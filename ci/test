@@ -7,27 +7,19 @@ set -o pipefail
 # Run a test harness.
 # Invoke as "ci/test".
 ################################################################################
+. ci/bootstrap
 
 main() {
-  check_files
-
   if [[ ${UP2DATE} = true ]]; then
     info "Image is up-to-date on docker hub; nothing left to do."
   else
+    run_precommit
     run_bats
   fi
 }
 
-check_files() {
-  echo
-  echo Check every file for things like trailing whitespace.
-  # Hint: -v1 shows just the names of offending files.
-  #       -v2 shows lines with trailing whitespace.
-  ci/check-files -v2
-
-  if command -v shellcheck &> /dev/null; then
-    shellcheck ci/vars
-  fi
+run_precommit() {
+  pre-commit run --all-files --verbose
 }
 
 run_bats() {
