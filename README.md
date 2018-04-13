@@ -16,6 +16,21 @@ from [PIP](https://pypi.python.org/pypi/awscli) in a Docker container.
 An updated version of this image is generally available within a few hours
 after a new version of awscli becomes available. See below for more details.
 
+**Table of Contents**
+
+- [Overview](#overview)
+  - [References](#references)
+  - [Build integrity](#build-integrity)
+- [How-to](#how-to)
+  - [Report issues](#report-issues)
+  - [Pull an already-built image](#pull-an-already-built-image)
+  - [View labels](#view-labels)
+  - [Configure](#configure)
+  - [Run](#run)
+  - [Build locally](#build-locally)
+  - [Test locally](#test-locally)
+- [Licenses](#licenses)
+
 
 Overview
 --------
