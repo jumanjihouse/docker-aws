@@ -6,7 +6,7 @@ fail_fast: false
 
 repos:
   - repo: https://github.com/jumanjihouse/pre-commit-hooks
-    rev: 1.5.1
+    rev: 1.6.0
     hooks:
       - id: forbid-binary
         exclude: >
@@ -27,6 +27,7 @@ repos:
     rev: v1.2.3
     hooks:
       - id: check-added-large-files
+      - id: check-byte-order-marker
       - id: check-case-conflict
       - id: check-executables-have-shebangs
       - id: check-json

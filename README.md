@@ -13,6 +13,8 @@ from [PIP](https://pypi.python.org/pypi/awscli) in a Docker container.
 [![Docker Registry](https://img.shields.io/docker/pulls/jumanjiman/aws.svg)](https://registry.hub.docker.com/u/jumanjiman/aws/)&nbsp;
 [![Circle CI](https://circleci.com/gh/jumanjihouse/docker-aws.png?circle-token=5303a3a083c3d19463bbd1b08937b24b3417d70e)](https://circleci.com/gh/jumanjihouse/docker-aws/tree/master 'View CI builds')
 
+[![Image last updated](https://img.shields.io/badge/dynamic/json.svg?url=https://api.microbadger.com/v1/images/jumanjiman/aws&label=Image%20last%20updated&query=$.LastUpdated&colorB=007ec6)](http://microbadger.com/images/jumanjiman/aws "View on microbadger.com")&nbsp;
+
 An updated version of this image is generally available within a few hours
 after a new version of awscli becomes available. See below for more details.
 
