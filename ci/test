@@ -10,7 +10,7 @@ set -o pipefail
 . ci/bootstrap
 
 main() {
-  if [[ ${UP2DATE} = true ]]; then
+  if [[ ${UP2DATE} == true ]]; then
     info "Image is up-to-date on docker hub; nothing left to do."
   else
     run_precommit
