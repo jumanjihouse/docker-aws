@@ -18,7 +18,7 @@ VERSION=${VERSION:-latest}
 #   LABEL version=$(aws --version 2>&1 | awk '{print $1}' | cut -d/ -f2)
 # Therefore we have to discover the version before we build the image
 # in order to put the version into a LABEL.
-if [[ ${VERSION} = latest ]] && command -v pypi &> /dev/null; then
+if [[ ${VERSION} == latest ]] && command -v pypi &>/dev/null; then
   VERSION="$(pypi info awscli | awk '/^Latest release/ {print $NF}')"
 fi
 
@@ -39,7 +39,7 @@ docker_hub_version() {
 
 # AUTOBUILD is defined through parameterized builds.
 # See ci/autobuild directory for details.
-if [[ ${AUTOBUILD} = true ]]; then
+if [[ ${AUTOBUILD} == true ]]; then
   # On circleci, we use https://github.com/jumanjihouse/cci
   # to provide the microbadger and pypi commands.
   pypi_latest=$(pypi info awscli | awk '/^Latest release/ {print $NF}')
@@ -49,12 +49,12 @@ if [[ ${AUTOBUILD} = true ]]; then
   info "pypi version is \"${pypi_latest}\" according to pypi."
   info "dock version is \"${dock_latest}\" according to microbadger."
 
-  if [[ ${pypi_latest} = "${dock_latest}" ]]; then
+  if [[ ${pypi_latest} == "${dock_latest}" ]]; then
     UP2DATE=true
   fi
 fi
 
-cat > ci/vars <<-EOF
+cat >ci/vars <<-EOF
 # shellcheck shell=bash
 declare -rx VERSION=${VERSION}
 declare -rx UP2DATE=${UP2DATE}
@@ -64,7 +64,7 @@ declare -rx TAG=\${VERSION}-\${BUILD_DATE}-git-\${VCS_REF}
 EOF
 
 . ci/vars
-if [[ ${UP2DATE} = true ]]; then
+if [[ ${UP2DATE} == true ]]; then
   info "Image is up-to-date on docker hub; nothing to do."
 else
   docker-compose build
