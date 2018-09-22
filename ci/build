@@ -68,6 +68,6 @@ if [[ ${UP2DATE} == true ]]; then
   info "Image is up-to-date on docker hub; nothing to do."
 else
   docker-compose build
-  docker images
   docker inspect jumanjiman/aws
+  docker images | grep -E -e '^REPOSITORY' -e '^jumanjiman/aws'
 fi
