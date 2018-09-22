@@ -199,6 +199,10 @@ Build an image locally on a host with Docker:
     # A specific version ("pessimistic").
     VERSION='1.16.19' ci/build
 
+    # The unstable development version ("v2").
+    # https://aws.amazon.com/blogs/developer/aws-cli-v2-development/
+    VERSION='2.0.0dev0' ci/build
+
 Run a container interactively from the built image:
 
     docker run --rm -it jumanjiman/aws

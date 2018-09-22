@@ -34,6 +34,20 @@ case "${VERSION}" in
   'latest')
     pip_install awscli
     ;;
+  '2.0.0dev0')
+    readonly install_dependencies="
+      git
+    "
+    readonly runtime_dependencies="
+      py-setuptools
+    "
+    # shellcheck disable=SC2086
+    apk add --no-cache --virtual=install_deps ${install_dependencies}
+    # shellcheck disable=SC2086
+    apk add --no-cache ${runtime_dependencies}
+    pip_install -e 'git://github.com/aws/aws-cli.git@v2#egg=awscli'
+    apk del --purge install_deps
+    ;;
   *)
     pip_install awscli=="${VERSION}"
     ;;
