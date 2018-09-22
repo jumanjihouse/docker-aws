@@ -19,7 +19,7 @@ main() {
 }
 
 run_precommit() {
-  pre-commit run --all-files --verbose
+  pre-commit run --all-files
 }
 
 run_bats() {

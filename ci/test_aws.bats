@@ -1,6 +1,6 @@
 # vim: set ts=2 sw=2 ai et:
 
-load options
+CAPS='--cap-drop all'
 
 @test "awscli shows help with no options" {
   run docker run --rm --read-only ${CAPS} jumanjiman/aws
