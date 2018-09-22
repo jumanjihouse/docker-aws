@@ -1,6 +1,5 @@
 #!/bin/bash
-set -e
-set -u
+set -eEu
 set -o pipefail
 
 ################################################################################
@@ -8,31 +7,15 @@ set -o pipefail
 # Invoke as "ci/test".
 ################################################################################
 . ci/bootstrap
+. ci/vars
 
 main() {
   if [[ ${UP2DATE} == true ]]; then
     info "Image is up-to-date on docker hub; nothing left to do."
   else
-    run_precommit
-    run_bats
+    run pre-commit run --all-files
+    run bats ci/test_*.bats
   fi
 }
-
-run_precommit() {
-  pre-commit run --all-files
-}
-
-run_bats() {
-  echo
-  echo Invoke BATS tests.
-  bats ci/test_*.bats
-}
-
-################################################################################
-# Program execution starts here.
-################################################################################
-
-. ci/helpers.sh
-. ci/vars
 
 main

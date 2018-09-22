@@ -6,22 +6,11 @@ set -o pipefail
 # Prepare the local dev environment.
 # Invoke from the root of the git repo as "ci/bootstrap".
 ################################################################################
-
-trap finish EXIT
+. ci/helpers.sh
 
 main() {
   setup_python_path
   install_precommit
-}
-
-finish() {
-  declare -ri RC=$?
-
-  if [[ $RC -eq 0 ]]; then
-    echo "$0 OK"
-  else
-    echo "[ERROR] $0 failed with exit status $RC"
-  fi
 }
 
 setup_python_path() {
@@ -34,8 +23,10 @@ setup_python_path() {
 }
 
 install_precommit() {
-  if ! command -v pre-commit &>/dev/null; then
-    pip install --user -Iv --compile --no-cache-dir pre-commit
+  if command -v pre-commit &>/dev/null; then
+    info 'pre-commit is already installed'
+  else
+    run pip install --user -Iv --compile --no-cache-dir --disable-pip-version-check pre-commit
   fi
 }
 

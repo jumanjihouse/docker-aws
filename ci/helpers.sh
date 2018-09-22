@@ -4,40 +4,34 @@
 # This collection of helper functions is sourced by the ci scripts.
 ################################################################################
 
-# Defaults.
-declare -i VERBOSITY=${VERBOSITY:-1}
-
 # Helper functions.
 err() {
-  echo ERROR: "$*" >&2
+  echo "[ERROR] $*" >&2
 }
 
 info() {
-  if [[ ${VERBOSITY} -ge 1 ]]; then
-    echo INFO: "$*" >&2
-  fi
+  echo "[INFO] $*" >&2
+}
+
+run() {
+  echo >&2
+  echo "[RUN] $*" >&2
+  # shellcheck disable=SC2048
+  $*
 }
 
 warn() {
-  if [[ ${VERBOSITY} -ge 1 ]]; then
-    echo WARN: "$*" >&2
-  fi
-}
-
-debug() {
-  if [[ ${VERBOSITY} -ge 2 ]]; then
-    echo DEBUG: "$*" >&2
-  fi
+  echo "[WARN] $*" >&2
 }
 
 finish() {
   declare -ri RC=$?
 
   if [ ${RC} -eq 0 ]; then
-    info "$0" OK
+    echo
+    echo "[PASS] $0 OK" >&2
   else
-    err "$0" failed with exit code ${RC}
-    exit ${RC}
+    err "$0 failed with exit code ${RC}"
   fi
 }
 

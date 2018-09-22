@@ -1,6 +1,5 @@
 #!/bin/bash
-set -e
-set -u
+set -eEu
 set -o pipefail
 
 ################################################################################
@@ -8,7 +7,7 @@ set -o pipefail
 # Invoke as "ci/build" from the top-level of the git repo.
 ################################################################################
 
-. ci/helpers.sh
+. ci/bootstrap
 
 # We usually want to install the latest version of awscli, but
 # allow to override by running `VERSION=1.11.27 ci/build`.
@@ -67,7 +66,7 @@ EOF
 if [[ ${UP2DATE} == true ]]; then
   info "Image is up-to-date on docker hub; nothing to do."
 else
-  docker-compose build
-  docker inspect jumanjiman/aws
-  docker images | grep -E -e '^REPOSITORY' -e '^jumanjiman/aws'
+  run docker-compose build
+  run docker inspect jumanjiman/aws
+  run docker images | grep -E -e '^REPOSITORY' -e '^jumanjiman/aws' -e 'RUN'
 fi
