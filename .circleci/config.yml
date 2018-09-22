@@ -1,6 +1,14 @@
 ---
 # https://circleci.com/docs/docker
 version: 2
+
+workflows:
+  version: 2
+
+  commits:
+    jobs:
+      - build
+
 jobs:
   build:
     docker:
