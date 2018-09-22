@@ -1,16 +1,39 @@
 ---
 # https://circleci.com/docs/docker
-version: 2
+version: 2.1
 
 workflows:
-  version: 2
-
   commits:
     jobs:
       - build
 
+  awscli_v2:
+    jobs:
+      - build:
+          awscli_version: "2.0.0dev0"
+    triggers:
+      - schedule:
+          cron: '0 1 * * *'
+          #      ^ ^ ^ ^ ^
+          #      | | | | |
+          #      | | | | +-- Day of the week (0-6 with 0=Sunday)
+          #      | | | +---- Month of the year (1-12)
+          #      | | +------ Day of the month (1-31)
+          #      | +-------- Hour (0-23)
+          #      +---------- Minute (0-59)
+          filters:
+            branches:
+              only:
+                - master
+
 jobs:
   build:
+    parameters:
+      awscli_version:
+        description: "Which version of awscli should we install?"
+        type: string
+        default: "latest"
+
     docker:
       # https://github.com/jumanjihouse/cci/pulls?q=is%3Apr+is%3Aclosed
       - image: jumanjiman/cci:20180707T2325-git-e2f6fbf
@@ -30,7 +53,7 @@ jobs:
       - run:
           name: Build the image
           command: |
-            ci/build
+            VERSION=<< parameters.awscli_version >> ci/build
 
       - run:
           name: Test the image

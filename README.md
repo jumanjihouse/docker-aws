@@ -26,6 +26,7 @@ after a new version of awscli becomes available. See below for more details.
 - [How-to](#how-to)
   - [Report issues](#report-issues)
   - [Pull an already-built image](#pull-an-already-built-image)
+  - [Choose a tag](#choose-a-tag)
   - [View labels](#view-labels)
   - [Configure](#configure)
   - [Run](#run)
@@ -49,6 +50,7 @@ a docker image and run it as a container.
 ### References
 
 * [AWS CLI docs](https://aws.amazon.com/cli/)
+* [AWS CLI v2](https://aws.amazon.com/blogs/developer/aws-cli-v2-development/)
 * [Python Package Index](https://pypi.python.org/pypi/awscli)
 * [AWS Developer Blog](https://aws.amazon.com/blogs/developer/super-charge-your-aws-command-line-experience-with-aws-shell/)
 * [Changelog](https://github.com/aws/aws-cli/blob/master/CHANGELOG.rst)
@@ -93,13 +95,17 @@ into the docker hub.
 
     docker pull jumanjiman/aws
 
-The "latest" tag always points to the latest version.
+
+### Choose a tag
+
+The optimistic "latest" tag always points to the latest stable version.<br/>
 In general, you should prefer to use a pessimistic (i.e., specific) tag.
 
 We provide multiple tags:
 
 * optimistic:  `jumanjiman/aws:latest`
 * pessimistic: `jumanjiman/aws:<version>-<builddate>-git-<hash>`
+* unstable v2: `jumanjiman/aws:2.0.0dev0-<builddate>-git-<hash>`
 
 Example:
 
@@ -119,6 +125,7 @@ and the git commit from this repo that was used to build the image.
 
 We push the tags automatically from the test harness, and
 we occasionally delete old tags from the Docker hub by hand.
+<br/>
 See https://hub.docker.com/r/jumanjiman/aws/tags/ for released tags.
 
 
