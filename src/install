@@ -1,0 +1,40 @@
+#!/bin/sh
+set -euo pipefail
+trap finish EXIT
+
+###############################################################################
+# Install a version of the AWS CLI.
+# There are no arguments.
+# Specify VERSION as an environment version.
+# If not specified, install "latest".
+###############################################################################
+
+readonly PROG="$(basename "$0")"
+readonly VERSION="${VERSION:-latest}"
+
+finish() {
+  readonly rc=$?
+
+  if [ $rc -eq 0 ]; then
+    echo "[PASS] ${PROG} OK VERSION=${VERSION}"
+  else
+    echo "[ERROR] ${PROG} failed with exit status $rc"
+  fi
+}
+
+pip_install() {
+  readonly args="$*"
+  readonly cmd="pip install -Iv --compile --no-cache-dir --disable-pip-version-check ${args}"
+
+  echo "[RUN] ${cmd}"
+  ${cmd}
+}
+
+case "${VERSION}" in
+  'latest')
+    pip_install awscli
+    ;;
+  *)
+    pip_install awscli=="${VERSION}"
+    ;;
+esac

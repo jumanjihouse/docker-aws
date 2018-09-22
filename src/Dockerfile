@@ -2,6 +2,8 @@ FROM alpine:3.8
 
 ARG VERSION
 
+COPY install /usr/local/sbin/
+
 RUN apk upgrade --no-cache --available && \
     apk add --no-cache \
       ca-certificates \
@@ -10,11 +12,7 @@ RUN apk upgrade --no-cache --available && \
       python \
       && \
     apk add --no-cache --virtual dev py2-pip && \
-    ( \
-      [[ ${VERSION} = latest ]] && \
-      pip install -Iv --compile --no-cache-dir awscli || \
-      pip install -Iv --compile --no-cache-dir awscli==${VERSION} \
-    ) && \
+    /usr/local/sbin/install && \
     apk del --purge dev \
     && adduser -D user
 

@@ -193,7 +193,11 @@ CIS Docker Security Benchmarks:
 
 Build an image locally on a host with Docker:
 
+    # Latest stable version ("optimistic").
     ci/build
+
+    # A specific version ("pessimistic").
+    VERSION='1.16.19' ci/build
 
 Run a container interactively from the built image:
 
