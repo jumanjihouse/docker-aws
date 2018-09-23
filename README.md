@@ -15,7 +15,7 @@ from [PIP](https://pypi.python.org/pypi/awscli) in a Docker container.
 
 [![Image last updated](https://img.shields.io/badge/dynamic/json.svg?url=https://api.microbadger.com/v1/images/jumanjiman/aws&label=Image%20last%20updated&query=$.LastUpdated&colorB=007ec6)](http://microbadger.com/images/jumanjiman/aws "View on microbadger.com")&nbsp;
 
-An updated version of this image is generally available within a few hours
+An updated version of this image is generally available within an hour or so
 after a new version of awscli becomes available. See below for more details.
 
 **Table of Contents**
@@ -26,6 +26,7 @@ after a new version of awscli becomes available. See below for more details.
 - [How-to](#how-to)
   - [Report issues](#report-issues)
   - [Pull an already-built image](#pull-an-already-built-image)
+  - [Choose a tag](#choose-a-tag)
   - [View labels](#view-labels)
   - [Configure](#configure)
   - [Run](#run)
@@ -49,6 +50,7 @@ a docker image and run it as a container.
 ### References
 
 * [AWS CLI docs](https://aws.amazon.com/cli/)
+* [AWS CLI v2](https://aws.amazon.com/blogs/developer/aws-cli-v2-development/)
 * [Python Package Index](https://pypi.python.org/pypi/awscli)
 * [AWS Developer Blog](https://aws.amazon.com/blogs/developer/super-charge-your-aws-command-line-experience-with-aws-shell/)
 * [Changelog](https://github.com/aws/aws-cli/blob/master/CHANGELOG.rst)
@@ -65,9 +67,8 @@ and runs acceptance tests.
 If all tests pass on master branch in the unattended test harness,
 it pushes the built images to the Docker hub.
 
-We trigger a parameterized build on circleci multiple times per day.
+We run a [parameterized build](.circleci/config.yml) on CircleCI once per hour.
 When there is a new version of awscli on pip, we build and publish a new image.
-See [`ci/autobuild`](ci/autobuild) for details.
 
 
 How-to
@@ -93,13 +94,17 @@ into the docker hub.
 
     docker pull jumanjiman/aws
 
-The "latest" tag always points to the latest version.
+
+### Choose a tag
+
+The optimistic "latest" tag always points to the latest stable version.<br/>
 In general, you should prefer to use a pessimistic (i.e., specific) tag.
 
 We provide multiple tags:
 
 * optimistic:  `jumanjiman/aws:latest`
 * pessimistic: `jumanjiman/aws:<version>-<builddate>-git-<hash>`
+* unstable v2: `jumanjiman/aws:2.0.0dev0-<builddate>-git-<hash>`
 
 Example:
 
@@ -119,6 +124,7 @@ and the git commit from this repo that was used to build the image.
 
 We push the tags automatically from the test harness, and
 we occasionally delete old tags from the Docker hub by hand.
+<br/>
 See https://hub.docker.com/r/jumanjiman/aws/tags/ for released tags.
 
 
@@ -193,7 +199,15 @@ CIS Docker Security Benchmarks:
 
 Build an image locally on a host with Docker:
 
+    # Latest stable version ("optimistic").
     ci/build
+
+    # A specific version ("pessimistic").
+    VERSION='1.16.19' ci/build
+
+    # The unstable development version ("v2").
+    # https://aws.amazon.com/blogs/developer/aws-cli-v2-development/
+    VERSION='2.0.0dev0' ci/build
 
 Run a container interactively from the built image:
 

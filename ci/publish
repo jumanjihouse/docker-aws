@@ -1,11 +1,12 @@
 #!/bin/bash
-set -e
-set -u
+set -eEu
 set -o pipefail
 
 ################################################################################
 # Publish the aws images to Docker Hub.
 ################################################################################
+. ci/helpers.sh
+. ci/vars
 
 main() {
   if [[ ${UP2DATE} == true ]]; then
@@ -21,23 +22,16 @@ main() {
 publish() {
   # shellcheck disable=SC2154
   docker login -u "${user}" -p "${pass}"
-  docker tag jumanjiman/aws jumanjiman/aws:"${TAG}"
-  docker push jumanjiman/aws:"${TAG}"
-  docker push jumanjiman/aws:latest
+  run docker tag jumanjiman/aws jumanjiman/aws:"${TAG}"
+  run docker push jumanjiman/aws:"${TAG}"
+  run docker push jumanjiman/aws:latest
   docker logout
 }
 
 poke_microbadger() {
-  echo -n 'INFO: microbadger '
+  echo -n '[INFO] microbadger '
   curl -X POST 'https://hooks.microbadger.com/images/jumanjiman/aws/Lan3ZPTzecbxGrzvkdxR-dTxIB8='
   echo
 }
-
-################################################################################
-# Program execution starts here.
-################################################################################
-
-. ci/helpers.sh
-. ci/vars
 
 main

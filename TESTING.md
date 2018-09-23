@@ -26,10 +26,10 @@ Output resembles:
     [forbid-tabs] No-tabs checker................................................................Passed
 
     Invoke BATS tests.
-     ✓ awscli shows help with no options
-     ✓ awscli is the correct version
+     ok awscli shows help with no options
+     ok awscli is the correct version
      - ci-build-url label is present (skipped: This test only runs on CircleCI)
-     ✓ version label is correct
+     ok version label is correct
 
     4 tests, 0 failures, 1 skipped
 
