@@ -10,6 +10,7 @@ set -o pipefail
 
 main() {
   setup_python_path
+  show_environment
   install_precommit
 }
 
@@ -20,6 +21,11 @@ setup_python_path() {
   if ! grep "${PYTHON_PATH}/bin" <(printenv PATH) &>/dev/null; then
     export PATH="${PATH}:${PYTHON_PATH}/bin"
   fi
+}
+
+show_environment() {
+  info 'Environment variables:'
+  indent "$(env)"
 }
 
 install_precommit() {

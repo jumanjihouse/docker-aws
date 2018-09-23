@@ -45,6 +45,12 @@ handle_err() {
   exit ${RC}
 }
 
+indent() {
+  while IFS='' read -r line; do
+    echo -e "\\t${line}"
+  done < <(echo "$*")
+}
+
 is_ci() {
   # Are we running in hands-free CI?
   [[ -n "${CIRCLECI:-}" ]]
