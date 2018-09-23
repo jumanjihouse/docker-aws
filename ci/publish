@@ -24,7 +24,11 @@ publish() {
   docker login -u "${user}" -p "${pass}"
   run docker tag jumanjiman/aws jumanjiman/aws:"${TAG}"
   run docker push jumanjiman/aws:"${TAG}"
-  run docker push jumanjiman/aws:latest
+  if [[ ${VERSION} =~ dev ]]; then
+    info 'Do not publish the unstable dev version as "latest".'
+  else
+    run docker push jumanjiman/aws:latest
+  fi
   docker logout
 }
 
