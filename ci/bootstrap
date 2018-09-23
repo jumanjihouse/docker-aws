@@ -12,6 +12,7 @@ main() {
   setup_python_path
   show_environment
   install_precommit
+  run pre-commit install-hooks
 }
 
 setup_python_path() {
