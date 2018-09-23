@@ -7,6 +7,32 @@ workflows:
     jobs:
       - build
 
+  # NOTE: autobuild was previously triggered via an API call
+  #       from my VPS in Digital Ocean.
+  #
+  #       Use `git checkout 1a5095c' to view the old scripts.
+  #
+  #       CircleCI schedule does NOT support cron step values (/).
+  awscli_stable:
+    jobs:
+      - build:
+          awscli_version: "latest"
+          autobuild: "true"
+    triggers:
+      - schedule:
+          cron: '3 * * * *'
+          #      ^ ^ ^ ^ ^
+          #      | | | | |
+          #      | | | | +-- Day of the week (0-6 with 0=Sunday)
+          #      | | | +---- Month of the year (1-12)
+          #      | | +------ Day of the month (1-31)
+          #      | +-------- Hour (0-23)
+          #      +---------- Minute (0-59)
+          filters:
+            branches:
+              only:
+                - master
+
   awscli_v2:
     jobs:
       - build:
@@ -29,6 +55,11 @@ workflows:
 jobs:
   build:
     parameters:
+      autobuild:
+        description: "Should we check to see if an image is already up-to-date?"
+        type: string
+        default: "false"
+
       awscli_version:
         description: "Which version of awscli should we install?"
         type: string
@@ -53,7 +84,7 @@ jobs:
       - run:
           name: Build the image
           command: |
-            VERSION=<< parameters.awscli_version >> ci/build
+            VERSION=<< parameters.awscli_version >> AUTOBUILD='<< parameters.autobuild >>' ci/build
 
       - run:
           name: Test the image
@@ -62,7 +93,6 @@ jobs:
 
       - deploy:
           name: Deploy from master branch
-          # yamllint disable rule:line-length
           command: |
             if [[ ${CIRCLE_BRANCH} = master ]] && [[ -z ${CIRCLE_PR_NUMBER} ]]; then
               ci/publish

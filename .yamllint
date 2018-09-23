@@ -1,0 +1,9 @@
+---
+# This file configures yamllint as used by pre-commit.
+# https://yamllint.readthedocs.io/en/latest/configuration.html
+extends: default
+
+rules:
+  line-length:
+    ignore: |
+      .circleci/config.yml

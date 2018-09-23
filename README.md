@@ -15,7 +15,7 @@ from [PIP](https://pypi.python.org/pypi/awscli) in a Docker container.
 
 [![Image last updated](https://img.shields.io/badge/dynamic/json.svg?url=https://api.microbadger.com/v1/images/jumanjiman/aws&label=Image%20last%20updated&query=$.LastUpdated&colorB=007ec6)](http://microbadger.com/images/jumanjiman/aws "View on microbadger.com")&nbsp;
 
-An updated version of this image is generally available within a few hours
+An updated version of this image is generally available within an hour or so
 after a new version of awscli becomes available. See below for more details.
 
 **Table of Contents**
@@ -67,9 +67,8 @@ and runs acceptance tests.
 If all tests pass on master branch in the unattended test harness,
 it pushes the built images to the Docker hub.
 
-We trigger a parameterized build on circleci multiple times per day.
+We run a [parameterized build](.circleci/config.yml) on CircleCI once per hour.
 When there is a new version of awscli on pip, we build and publish a new image.
-See [`ci/autobuild`](ci/autobuild) for details.
 
 
 How-to
