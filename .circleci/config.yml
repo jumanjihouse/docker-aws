@@ -84,7 +84,7 @@ jobs:
       - run:
           name: Build the image
           command: |
-            VERSION=<< parameters.awscli_version >> AUTOBUILD='<< parameters.autobuild >>' ci/build
+            VERSION='<< parameters.awscli_version >>' AUTOBUILD='<< parameters.autobuild >>' ci/build
 
       - run:
           name: Test the image
