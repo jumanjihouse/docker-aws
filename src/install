@@ -36,7 +36,10 @@ case "${VERSION}" in
     ;;
   '2.0.0dev0')
     readonly install_dependencies="
+      gcc
       git
+      musl-dev
+      python2-dev
     "
     readonly runtime_dependencies="
       py-setuptools
